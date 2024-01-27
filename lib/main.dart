@@ -53,12 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final Result result;
 
     if (myHand == computerHand) {
-      result = Result.draw;
-    } else if (myHand == Hand.rock && computerHand == Hand.scissors) {
-      result = Result.win;
-    } else if (myHand == Hand.scissors && computerHand == Hand.paper) {
-      result = Result.win;
-    } else if (myHand == Hand.paper && computerHand == Hand.rock) {
       result = Result.win;
     } else {
       result = Result.lose;
@@ -112,13 +106,13 @@ class _MyHomePageState extends State<MyHomePage> {
           FloatingActionButton(
             onPressed: () {
               setState(() {
-                myHand = Hand.rock;
+                myHand = Hand.up;
               });
               chooseComputerText();
             },
             tooltip: 'Increment',
             child: const Text(
-              '👊',
+              '☝️',
               style: TextStyle(fontSize: 30),
             ),
           ),
@@ -128,13 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
           FloatingActionButton(
             onPressed: () {
               setState(() {
-                myHand = Hand.scissors;
+                myHand = Hand.down;
               });
               chooseComputerText();
             },
             tooltip: 'Increment',
             child: const Text(
-              '✌️',
+              '👇',
               style: TextStyle(fontSize: 30),
             ),
           ),
@@ -144,13 +138,29 @@ class _MyHomePageState extends State<MyHomePage> {
           FloatingActionButton(
             onPressed: () {
               setState(() {
-                myHand = Hand.paper;
+                myHand = Hand.left;
               });
               chooseComputerText();
             },
             tooltip: 'Increment',
             child: const Text(
-              '✋',
+              '👈',
+              style: TextStyle(fontSize: 30),
+            ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              setState(() {
+                myHand = Hand.right;
+              });
+              chooseComputerText();
+            },
+            tooltip: 'Increment',
+            child: const Text(
+              '👉',
               style: TextStyle(fontSize: 30),
             ),
           ),
@@ -161,26 +171,28 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 enum Hand {
-  rock,
-  scissors,
-  paper;
+  up,
+  down,
+  left,
+  right;
 
   String get text {
     switch (this) {
-      case Hand.rock:
-        return '👊';
-      case Hand.scissors:
-        return '✌️';
-      case Hand.paper:
-        return '✋';
+      case Hand.up:
+        return '☝️';
+      case Hand.down:
+        return '👇';
+      case Hand.left:
+        return '👈';
+      case Hand.right:
+        return '👉';
     }
   }
 }
 
 enum Result {
   win,
-  lose,
-  draw;
+  lose;
 
   String get text {
     switch (this) {
@@ -188,8 +200,6 @@ enum Result {
         return '勝ち';
       case Result.lose:
         return '負け';
-      case Result.draw:
-        return 'あいこ';
     }
   }
 }
